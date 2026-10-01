@@ -1,141 +1,107 @@
 import React from 'react';
 
-export const TShirtAsset: React.FC<{ accent?: string }> = ({ accent = '#a855f7' }) => (
-  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]" fill="none">
-    <defs>
-      <linearGradient id="teeBody" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#18181b" />
-        <stop offset="40%" stopColor="#09090b" />
-        <stop offset="100%" stopColor="#020203" />
-      </linearGradient>
-      <linearGradient id="teeSheen" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="rgba(255,255,255,0.18)" />
-        <stop offset="100%" stopColor="transparent" />
-      </linearGradient>
-    </defs>
-    {/* Body Contour */}
+export const TShirtAsset: React.FC<{ accent?: string }> = ({ accent = '#8b5cf6' }) => (
+  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[4px_4px_0px_#000]" fill="none">
+    {/* Body Contour with Neo-Brutalist heavy stroke */}
     <path
       d="M100 65 Q130 95 160 95 Q190 95 220 65 L275 110 L245 155 L215 135 L215 285 L105 285 L105 135 L75 155 L45 110 Z"
-      fill="url(#teeBody)"
-      stroke="rgba(255,255,255,0.15)"
-      strokeWidth="1.5"
+      fill="#ffffff"
+      stroke="#000000"
+      strokeWidth="3.5"
     />
     {/* Ribbed Collar */}
-    <path d="M100 65 Q130 95 160 95 Q190 95 220 65" stroke={accent} strokeWidth="3" fill="none" strokeLinecap="round" />
-    {/* Left Shoulder Light Pass */}
-    <path d="M100 65 L45 110 L75 155 L105 135 Z" fill="url(#teeSheen)" opacity="0.3" />
-    {/* Center High-Density Artwork */}
-    <g transform="translate(120, 140)">
-      <rect x="0" y="0" width="80" height="85" rx="10" fill="#09090b" stroke={accent} strokeWidth="1.5" />
-      <circle cx="40" cy="35" r="16" fill={accent} opacity="0.8" />
-      <path d="M34 35 L40 26 L46 35 L40 44 Z" fill="#ffffff" />
-      <text x="40" y="66" textAnchor="middle" fill="#ffffff" fontSize="7" fontWeight="bold" letterSpacing="1.5" fontFamily="sans-serif">
-        VOLA TOUR
+    <path
+      d="M100 65 Q130 95 160 95 Q190 95 220 65"
+      stroke="#000000"
+      strokeWidth="4"
+      fill="none"
+      strokeLinecap="round"
+    />
+    {/* Sleeves Stitches */}
+    <path d="M45 110 L75 155" stroke="#000000" strokeWidth="2.5" strokeDasharray="4 3" />
+    <path d="M275 110 L245 155" stroke="#000000" strokeWidth="2.5" strokeDasharray="4 3" />
+    {/* High Contrast Center Graphic Badge */}
+    <g transform="translate(118, 135)">
+      <rect x="0" y="0" width="84" height="90" rx="8" fill={accent} stroke="#000000" strokeWidth="2.5" />
+      <circle cx="42" cy="38" r="18" fill="#facc15" stroke="#000000" strokeWidth="2" />
+      <path d="M35 38 L42 28 L49 38 L42 48 Z" fill="#000000" />
+      <text x="42" y="70" textAnchor="middle" fill="#000000" fontSize="8" fontWeight="900" letterSpacing="1.5" fontFamily="sans-serif">
+        VOLA FEST
       </text>
-      <text x="40" y="76" textAnchor="middle" fill={accent} fontSize="5" fontWeight="bold" letterSpacing="1" fontFamily="sans-serif">
-        HEAVY 24S
+      <text x="42" y="80" textAnchor="middle" fill="#000000" fontSize="5.5" fontWeight="bold" letterSpacing="1" fontFamily="sans-serif">
+        24S COMBED
       </text>
     </g>
   </svg>
 );
 
 export const LanyardAsset: React.FC<{ accent?: string }> = ({ accent = '#06b6d4' }) => (
-  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]" fill="none">
-    <defs>
-      <linearGradient id="strapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#7c3aed" />
-        <stop offset="50%" stopColor="#a855f7" />
-        <stop offset="100%" stopColor="#06b6d4" />
-      </linearGradient>
-    </defs>
-    {/* Straps */}
-    <path d="M110 10 L150 140 L160 140 L120 10 Z" fill="url(#strapGrad)" />
-    <path d="M210 10 L170 140 L160 140 L200 10 Z" fill="url(#strapGrad)" />
+  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[4px_4px_0px_#000]" fill="none">
+    {/* Straps with Bold Outlines */}
+    <path d="M110 10 L150 140 L160 140 L120 10 Z" fill={accent} stroke="#000000" strokeWidth="2.5" />
+    <path d="M210 10 L170 140 L160 140 L200 10 Z" fill={accent} stroke="#000000" strokeWidth="2.5" />
     {/* Clasp */}
-    <rect x="150" y="135" width="20" height="24" rx="4" fill="#94a3b8" stroke="#334155" />
-    <ellipse cx="160" cy="165" rx="8" ry="10" fill="none" stroke="#e2e8f0" strokeWidth="2.5" />
-    {/* Pass */}
+    <rect x="150" y="135" width="20" height="24" rx="3" fill="#facc15" stroke="#000000" strokeWidth="2.5" />
+    <ellipse cx="160" cy="165" rx="8" ry="10" fill="none" stroke="#000000" strokeWidth="3" />
+    {/* PVC Pass */}
     <g transform="translate(95, 175)">
-      <rect x="0" y="0" width="130" height="135" rx="12" fill="#09090b" stroke={accent} strokeWidth="2" />
-      <rect x="0" y="12" width="130" height="30" fill={accent} />
-      <text x="65" y="32" textAnchor="middle" fill="#ffffff" fontSize="10" fontWeight="bold" letterSpacing="2" fontFamily="sans-serif">
-        VIP ALL ACCESS
+      <rect x="0" y="0" width="130" height="135" rx="8" fill="#ffffff" stroke="#000000" strokeWidth="3" />
+      <rect x="0" y="12" width="130" height="32" fill="#000000" />
+      <text x="65" y="33" textAnchor="middle" fill="#a3e635" fontSize="11" fontWeight="900" letterSpacing="2" fontFamily="sans-serif">
+        VIP ACCESS
       </text>
-      <rect x="35" y="55" width="60" height="45" rx="6" fill="#18181b" stroke="#3f3f46" />
-      <circle cx="65" cy="74" r="12" fill={accent} opacity="0.8" />
-      {/* Mini Barcode */}
+      <rect x="35" y="55" width="60" height="45" rx="4" fill="#f1f5f9" stroke="#000000" strokeWidth="2" />
+      <circle cx="65" cy="74" r="14" fill={accent} stroke="#000000" strokeWidth="1.5" />
+      {/* Barcode */}
       <g transform="translate(25, 110)">
-        <rect x="0" y="0" width="3" height="15" fill="#f4f4f5" />
-        <rect x="6" y="0" width="5" height="15" fill="#f4f4f5" />
-        <rect x="15" y="0" width="2" height="15" fill="#f4f4f5" />
-        <rect x="20" y="0" width="6" height="15" fill="#f4f4f5" />
-        <rect x="30" y="0" width="4" height="15" fill="#f4f4f5" />
-        <rect x="38" y="0" width="7" height="15" fill="#f4f4f5" />
-        <rect x="49" y="0" width="3" height="15" fill="#f4f4f5" />
-        <rect x="56" y="0" width="8" height="15" fill="#f4f4f5" />
-        <rect x="68" y="0" width="4" height="15" fill="#f4f4f5" />
-        <rect x="75" y="0" width="5" height="15" fill="#f4f4f5" />
+        <rect x="0" y="0" width="4" height="15" fill="#000000" />
+        <rect x="7" y="0" width="6" height="15" fill="#000000" />
+        <rect x="16" y="0" width="3" height="15" fill="#000000" />
+        <rect x="22" y="0" width="7" height="15" fill="#000000" />
+        <rect x="33" y="0" width="4" height="15" fill="#000000" />
+        <rect x="42" y="0" width="8" height="15" fill="#000000" />
+        <rect x="54" y="0" width="3" height="15" fill="#000000" />
+        <rect x="62" y="0" width="8" height="15" fill="#000000" />
+        <rect x="74" y="0" width="5" height="15" fill="#000000" />
       </g>
     </g>
   </svg>
 );
 
 export const TumblerAsset: React.FC<{ accent?: string }> = ({ accent = '#f97316' }) => (
-  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]" fill="none">
-    <defs>
-      <linearGradient id="tumblerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#09090b" />
-        <stop offset="35%" stopColor="#27272a" />
-        <stop offset="65%" stopColor="#18181b" />
-        <stop offset="100%" stopColor="#09090b" />
-      </linearGradient>
-    </defs>
+  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[4px_4px_0px_#000]" fill="none">
     {/* Cap */}
-    <rect x="125" y="45" width="70" height="20" rx="4" fill="#52525b" stroke="#71717a" />
-    <rect x="115" y="65" width="90" height="22" rx="5" fill="#18181b" stroke="#3f3f46" />
-    <rect x="118" y="73" width="84" height="6" fill={accent} />
+    <rect x="125" y="45" width="70" height="20" rx="3" fill="#ffffff" stroke="#000000" strokeWidth="2.5" />
+    <rect x="115" y="65" width="90" height="22" rx="4" fill="#000000" stroke="#000000" strokeWidth="2.5" />
+    <rect x="118" y="73" width="84" height="6" fill="#a3e635" />
     {/* Body */}
-    <path d="M115 87 L125 285 Q160 295 195 285 L205 87 Z" fill="url(#tumblerGrad)" stroke="#3f3f46" strokeWidth="1.5" />
-    {/* Laser Engraving */}
+    <path d="M115 87 L125 285 Q160 295 195 285 L205 87 Z" fill={accent} stroke="#000000" strokeWidth="3" />
+    {/* Laser Engraving Brutalist Badge */}
     <g transform="translate(160, 180)">
-      <circle cx="0" cy="-20" r="14" fill="none" stroke="#e4e4e7" strokeWidth="1.8" />
-      <path d="M-6 -20 L0 -28 L6 -20 L0 -12 Z" fill="#e4e4e7" />
-      <text x="0" y="8" textAnchor="middle" fill="#e4e4e7" fontSize="9" fontWeight="bold" letterSpacing="2" fontFamily="sans-serif">
-        VOLA THERMAL
+      <rect x="-38" y="-35" width="76" height="70" rx="6" fill="#ffffff" stroke="#000000" strokeWidth="2.5" />
+      <circle cx="0" cy="-12" r="12" fill="#000000" />
+      <path d="M-5 -12 L0 -19 L5 -12 L0 -5 Z" fill="#ffffff" />
+      <text x="0" y="14" textAnchor="middle" fill="#000000" fontSize="9" fontWeight="900" letterSpacing="1.5" fontFamily="sans-serif">
+        VOLA THERM
       </text>
-      <text x="0" y="20" textAnchor="middle" fill={accent} fontSize="6" fontWeight="bold" letterSpacing="1.2" fontFamily="sans-serif">
-        SUS 304 POWDER
+      <text x="0" y="25" textAnchor="middle" fill="#000000" fontSize="6" fontWeight="bold" letterSpacing="1" fontFamily="sans-serif">
+        SUS 304 600ML
       </text>
     </g>
   </svg>
 );
 
-export const HardboxAsset: React.FC<{ accent?: string }> = ({ accent = '#10b981' }) => (
-  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]" fill="none">
-    <defs>
-      <linearGradient id="boxTop" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#1e293b" />
-        <stop offset="100%" stopColor="#0f172a" />
-      </linearGradient>
-      <linearGradient id="boxFront" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#0f172a" />
-        <stop offset="100%" stopColor="#020617" />
-      </linearGradient>
-      <linearGradient id="boxSide" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#334155" />
-        <stop offset="100%" stopColor="#1e293b" />
-      </linearGradient>
-    </defs>
-    {/* Isometric 3D Gift Box */}
-    <polygon points="160,50 260,95 160,140 60,95" fill="url(#boxTop)" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-    <polygon points="60,95 160,140 160,250 60,205" fill="url(#boxFront)" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-    <polygon points="160,140 260,95 260,205 160,250" fill="url(#boxSide)" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-    {/* Foil Stamp Emblem on Top */}
+export const HardboxAsset: React.FC<{ accent?: string }> = ({ accent = '#a3e635' }) => (
+  <svg viewBox="0 0 320 320" className="w-full h-full drop-shadow-[4px_4px_0px_#000]" fill="none">
+    {/* Isometric 3D Neo-Brutalist Gift Box */}
+    <polygon points="160,50 260,95 160,140 60,95" fill={accent} stroke="#000000" strokeWidth="3" />
+    <polygon points="60,95 160,140 160,250 60,205" fill="#ffffff" stroke="#000000" strokeWidth="3" />
+    <polygon points="160,140 260,95 260,205 160,250" fill="#facc15" stroke="#000000" strokeWidth="3" />
+    {/* Emblem Sticker on Top */}
     <g transform="translate(160, 95)">
-      <polygon points="0,-18 20,-9 0,0 -20,-9" fill="none" stroke={accent} strokeWidth="1.5" />
-      <polygon points="0,-12 12,-6 0,0 -12,-6" fill={accent} opacity="0.6" />
-      <text x="0" y="16" textAnchor="middle" fill="#ffffff" fontSize="8" fontWeight="bold" letterSpacing="2" fontFamily="sans-serif">
-        EXECUTIVE KIT
+      <polygon points="0,-18 20,-9 0,0 -20,-9" fill="#000000" />
+      <text x="0" y="18" textAnchor="middle" fill="#000000" fontSize="9" fontWeight="900" letterSpacing="2" fontFamily="sans-serif">
+        EXECUTIVE BOX
       </text>
     </g>
   </svg>

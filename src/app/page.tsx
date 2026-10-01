@@ -11,15 +11,15 @@ import { MinimalFooter } from '@/components/motion/MinimalFooter';
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-x-hidden selection:bg-purple-500 selection:text-black">
-      {/* Floating Interactive Cursor */}
+    <div className="relative min-h-screen bg-[#f8fafc] text-black overflow-x-hidden selection:bg-[#a3e635] selection:text-black">
+      {/* Neo-Brutalist Custom Magnetic Cursor */}
       <CustomCursor />
 
       {/* Floating Capsule Header */}
       <AwwwardsNavbar />
 
       <main className="relative z-10 w-full">
-        {/* 1. Kinetic Typography & Floating 3D-Like Merchandise Hero */}
+        {/* 1. Kinetic Typography & Floating Merchandise Hero */}
         <KineticHero />
 
         {/* 2. Sticky Viewport 3D Carousel (Scrollytelling) */}

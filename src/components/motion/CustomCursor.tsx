@@ -15,7 +15,6 @@ export const CustomCursor: React.FC = () => {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Only activate custom cursor on fine pointer devices (desktop)
     if (window.matchMedia('(pointer: coarse)').matches) {
       setCursorVariant('hidden');
       return;
@@ -51,7 +50,7 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <motion.div
-      className="pointer-events-none fixed top-0 left-0 z-50 flex items-center justify-center rounded-full font-mono text-[9px] font-bold tracking-widest text-black"
+      className="pointer-events-none fixed top-0 left-0 z-50 flex items-center justify-center rounded-full font-mono text-[10px] font-black tracking-widest text-black border-2 border-black"
       style={{
         x: cursorX,
         y: cursorY,
@@ -59,11 +58,10 @@ export const CustomCursor: React.FC = () => {
         translateY: '-50%',
       }}
       animate={{
-        width: cursorVariant === 'hover' ? 84 : 14,
-        height: cursorVariant === 'hover' ? 84 : 14,
-        backgroundColor: cursorVariant === 'hover' ? '#ffffff' : '#a855f7',
-        mixBlendMode: cursorVariant === 'hover' ? 'normal' : 'difference',
-        boxShadow: cursorVariant === 'hover' ? '0 0 30px rgba(255,255,255,0.7)' : '0 0 12px rgba(168,85,247,0.8)',
+        width: cursorVariant === 'hover' ? 88 : 14,
+        height: cursorVariant === 'hover' ? 88 : 14,
+        backgroundColor: cursorVariant === 'hover' ? '#a3e635' : '#000000',
+        boxShadow: cursorVariant === 'hover' ? '4px 4px 0px 0px #000' : 'none',
       }}
       transition={{ type: 'spring', damping: 20, stiffness: 300 }}
     >
@@ -72,7 +70,7 @@ export const CustomCursor: React.FC = () => {
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          className="uppercase select-none text-center"
+          className="uppercase select-none text-center font-bold px-1"
         >
           {cursorText}
         </motion.span>

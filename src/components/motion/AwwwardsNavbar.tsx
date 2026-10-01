@@ -7,36 +7,36 @@ import { COMPANY_INFO } from '@/lib/constants';
 
 export const AwwwardsNavbar: React.FC = () => {
   return (
-    <header className="fixed top-6 left-0 right-0 z-40 w-full px-4 sm:px-8 pointer-events-none flex justify-center">
-      <div className="w-full max-w-5xl rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-2xl px-6 py-3.5 flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.8)] pointer-events-auto">
+    <header className="fixed top-5 left-0 right-0 z-40 w-full px-4 sm:px-8 pointer-events-none flex justify-center">
+      <div className="w-full max-w-5xl rounded-2xl bg-white border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] px-6 py-3.5 flex items-center justify-between pointer-events-auto">
         {/* Brand */}
         <a href="#" className="flex items-center space-x-3 group select-none">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-black font-black text-xs shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+          <div className="w-8 h-8 rounded-lg bg-[#a3e635] border-2 border-black flex items-center justify-center text-black font-black text-sm shadow-[2px_2px_0px_#000]">
             V
           </div>
           <div className="flex flex-col">
-            <span className="font-heading font-black text-sm text-white tracking-tight">
-              VOLA<span className="text-purple-400">.CREATIVE</span>
+            <span className="font-heading font-black text-base text-black tracking-tight">
+              VOLA<span className="text-[#8b5cf6]">.CREATIVE</span>
             </span>
           </div>
         </a>
 
         {/* Navigation items */}
-        <nav className="hidden md:flex items-center space-x-8 text-[11px] font-mono uppercase tracking-widest text-zinc-400">
-          <a href="#carousel-3d" className="hover:text-white transition-colors">
+        <nav className="hidden md:flex items-center space-x-8 text-xs font-mono font-black uppercase tracking-wider text-black">
+          <a href="#carousel-3d" className="hover:bg-[#facc15] px-2 py-1 rounded transition-colors">
             // 3D Orbit
           </a>
-          <a href="#horizontal-rig" className="hover:text-white transition-colors">
+          <a href="#horizontal-rig" className="hover:bg-[#facc15] px-2 py-1 rounded transition-colors">
             // Showroom Rail
           </a>
-          <a href="#contact" className="hover:text-white transition-colors">
-            // Inquire
+          <a href="#contact" className="hover:bg-[#facc15] px-2 py-1 rounded transition-colors">
+            // Form RFQ
           </a>
         </nav>
 
         {/* CTA */}
         <MagneticButton href={`https://wa.me/${COMPANY_INFO.phoneRaw}`} cursorText="CHAT">
-          <div className="flex items-center space-x-2 px-4 py-2 rounded-full bg-white text-black font-mono text-[11px] font-bold tracking-wider hover:bg-zinc-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+          <div className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-black text-white font-mono text-xs font-black tracking-wider border-2 border-black hover:bg-[#a3e635] hover:text-black transition-colors shadow-[2px_2px_0px_0px_#000]">
             <MessageCircle className="w-3.5 h-3.5" />
             <span>KONSULTASI</span>
           </div>

@@ -2,17 +2,18 @@
 
 @layer base {
   :root {
-    --bg-base: #030712;
-    --bg-card: rgba(15, 23, 42, 0.65);
-    --bg-card-hover: rgba(30, 41, 59, 0.8);
-    --border-glass: rgba(255, 255, 255, 0.08);
-    --border-glass-glow: rgba(167, 139, 250, 0.35);
-    --color-primary: #8b5cf6;
+    --bg-base: #f8fafc;
+    --bg-card: #ffffff;
+    --border-brutal: #000000;
+    --shadow-brutal: 5px 5px 0px 0px #000000;
+    --shadow-brutal-lg: 8px 8px 0px 0px #000000;
+    --color-lime: #a3e635;
+    --color-yellow: #facc15;
+    --color-violet: #8b5cf6;
     --color-cyan: #06b6d4;
-    --color-orange: #f97316;
-    --color-emerald: #10b981;
-    --text-primary: #f8fafc;
-    --text-muted: #94a3b8;
+    --color-coral: #fb7185;
+    --text-primary: #09090b;
+    --text-muted: #52525b;
     --font-heading: 'Playfair Display', Georgia, serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -24,9 +25,9 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.18) 0%, transparent 60%),
-    radial-gradient(circle at 100% 40%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 0% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
   background-attachment: fixed;
 }
 
@@ -36,20 +37,36 @@ h1, h2, h3, .font-heading {
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-/* Glassmorphism & Cyber Border */
-.glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glass);
+/* Neo-Brutalist Classes */
+.brutal-card {
+  background-color: #ffffff;
+  border: 2.5px solid #000000;
+  box-shadow: var(--shadow-brutal);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-panel-hover:hover {
-  border-color: var(--border-glass-glow);
-  box-shadow: 0 0 30px -5px rgba(139, 92, 246, 0.25);
+.brutal-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-brutal-lg);
+}
+
+.brutal-btn {
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px 0px #000000;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px 0px #000000;
+}
+
+.brutal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #000000;
 }
 
 /* 3D Perspective Container */
@@ -70,10 +87,16 @@ html {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 28s linear infinite;
+  animation: marquee 24s linear infinite;
 }
 
-.animate-marquee:hover {
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee 26s linear infinite reverse;
+}
+
+.animate-marquee:hover, .animate-marquee-reverse:hover {
   animation-play-state: paused;
 }
 
