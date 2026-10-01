@@ -1,0 +1,82 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+
+export const CustomCursor: React.FC = () => {
+  const [cursorText, setCursorText] = useState('');
+  const [cursorVariant, setCursorVariant] = useState<'default' | 'hover' | 'hidden'>('default');
+
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+
+  const springConfig = { damping: 25, stiffness: 350, mass: 0.5 };
+  const cursorX = useSpring(mouseX, springConfig);
+  const cursorY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    // Only activate custom cursor on fine pointer devices (desktop)
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      setCursorVariant('hidden');
+      return;
+    }
+
+    const moveCursor = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest('[data-cursor]');
+      if (target) {
+        const text = target.getAttribute('data-cursor') || 'VIEW';
+        setCursorText(text);
+        setCursorVariant('hover');
+      } else {
+        setCursorText('');
+        setCursorVariant('default');
+      }
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+    document.addEventListener('mouseover', handleMouseOver);
+
+    return () => {
+      window.removeEventListener('mousemove', moveCursor);
+      document.removeEventListener('mouseover', handleMouseOver);
+    };
+  }, [mouseX, mouseY]);
+
+  if (cursorVariant === 'hidden') return null;
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed top-0 left-0 z-50 flex items-center justify-center rounded-full font-mono text-[9px] font-bold tracking-widest text-black"
+      style={{
+        x: cursorX,
+        y: cursorY,
+        translateX: '-50%',
+        translateY: '-50%',
+      }}
+      animate={{
+        width: cursorVariant === 'hover' ? 84 : 14,
+        height: cursorVariant === 'hover' ? 84 : 14,
+        backgroundColor: cursorVariant === 'hover' ? '#ffffff' : '#a855f7',
+        mixBlendMode: cursorVariant === 'hover' ? 'normal' : 'difference',
+        boxShadow: cursorVariant === 'hover' ? '0 0 30px rgba(255,255,255,0.7)' : '0 0 12px rgba(168,85,247,0.8)',
+      }}
+      transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+    >
+      {cursorVariant === 'hover' && (
+        <motion.span
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          className="uppercase select-none text-center"
+        >
+          {cursorText}
+        </motion.span>
+      )}
+    </motion.div>
+  );
+};
