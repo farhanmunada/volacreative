@@ -61,14 +61,14 @@ rumahkita/
 3. **Generator WhatsApp Terstruktur:**
    Formulir RFQ menghitung subtotal perkiraan berdasarkan kuantitas, menghasilkan URL WhatsApp resmi berformat rapi, dan memicu navigasi aman ke WhatsApp Web/App.
 
-## 5. Token Desain (CSS Variables di globals.css)
-- `--color-primary`: `#7C3AED`
-- `--color-secondary`: `#A78BFA`
-- `--color-accent`: `#EA580C`
-- `--color-background`: `#FAF5FF`
-- `--color-foreground`: `#0F172A`
-- `--color-card`: `#FFFFFF`
-- `--color-border`: `#DDD6FE`
+## 5. Token Desain (HorizonX Obsidian Theme di globals.css)
+- `--bg-base`: `#030712` (Obsidian Deep Dark)
+- `--bg-card`: `rgba(15, 23, 42, 0.65)` (Liquid Glass)
+- `--border-glass`: `rgba(255, 255, 255, 0.08)`
+- `--color-primary`: `#8B5CF6` (Electric Purple)
+- `--color-cyan`: `#06B6D4` (Cyber Cyan)
+- `--color-orange`: `#F97316` (Sunset Orange)
+- Typography: `Playfair Display` + `Inter` + Monospace HUD metadata
 
 ## 6. Perintah Verifikasi
 - Build: `npm run build`

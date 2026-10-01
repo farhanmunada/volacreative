@@ -8,7 +8,7 @@ interface TumblerProps {
 
 export const TumblerMockup: React.FC<TumblerProps> = ({
   categoryTitle,
-  themeColor = '#10B981',
+  themeColor = '#06B6D4',
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -19,122 +19,120 @@ export const TumblerMockup: React.FC<TumblerProps> = ({
     config: { damping: 13, mass: 0.8, stiffness: 110 },
   });
 
-  // Laser reflection sweep across tumbler
-  const laserSweep = interpolate(frame % 90, [0, 45, 90], [-60, 180, 240]);
-  const floatY = Math.sin(frame / 16) * 7;
+  const rotateY = Math.sin(frame / 22) * 15;
+  const rotateX = Math.cos(frame / 26) * 6;
+  const floatY = Math.sin(frame / 16) * 10;
+  const laserSweep = interpolate(frame % 70, [0, 35, 70], [-100, 220, 340]);
 
   return (
     <div
       style={{
-        transform: `scale(${scale}) translateY(${floatY}px)`,
-        transformOrigin: 'center center',
+        transform: `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${floatY}px) scale(${scale})`,
+        transformStyle: 'preserve-3d',
       }}
       className="relative flex flex-col items-center justify-center w-full h-full select-none"
     >
-      {/* Background Soft Glow */}
       <div
-        className="absolute w-64 h-64 rounded-full blur-3xl opacity-25 pointer-events-none"
-        style={{ backgroundColor: themeColor }}
+        className="absolute w-80 h-80 rounded-full blur-[90px] opacity-35 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle, ${themeColor} 0%, rgba(16,185,129,0.3) 60%, transparent 80%)`,
+        }}
       />
 
       <svg
-        viewBox="0 0 340 400"
-        className="w-72 h-72 md:w-80 md:h-80 drop-shadow-2xl"
+        viewBox="0 0 360 420"
+        className="w-80 h-80 md:w-96 md:h-96 filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Tumbler Body Gradient */}
-          <linearGradient id="tumblerBody" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#1E293B" />
-            <stop offset="35%" stopColor="#334155" />
-            <stop offset="55%" stopColor="#475569" />
-            <stop offset="75%" stopColor="#1E293B" />
-            <stop offset="100%" stopColor="#0F172A" />
+          <linearGradient id="cylinderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#0B132B" />
+            <stop offset="25%" stopColor="#1C2541" />
+            <stop offset="50%" stopColor="#3A506B" />
+            <stop offset="70%" stopColor="#1C2541" />
+            <stop offset="100%" stopColor="#0B132B" />
           </linearGradient>
 
-          {/* Stainless Steel Cap Gradient */}
-          <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#94A3B8" />
+          <linearGradient id="steelLid" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#64748B" />
             <stop offset="50%" stopColor="#F8FAFC" />
-            <stop offset="100%" stopColor="#64748B" />
+            <stop offset="100%" stopColor="#475569" />
           </linearGradient>
 
-          {/* Laser Sheen Clip Path */}
-          <clipPath id="tumblerClip">
-            <path d="M120 110 L130 330 Q170 345 210 330 L220 110 Z" />
+          <clipPath id="tumblerMask">
+            <path d="M125 110 L135 345 Q180 360 225 345 L235 110 Z" />
           </clipPath>
         </defs>
 
-        {/* Tumbler Cap / Lid */}
-        <rect x="135" y="65" width="70" height="20" rx="4" fill="url(#capGrad)" stroke="#334155" />
-        <rect x="125" y="85" width="90" height="25" rx="6" fill="#0F172A" stroke="#334155" />
+        {/* Stainless Steel Cap & Silicone Seal */}
+        <rect x="145" y="65" width="70" height="22" rx="5" fill="url(#steelLid)" stroke="#334155" />
+        <rect x="132" y="87" width="96" height="25" rx="6" fill="#0B132B" stroke="#334155" />
+        <rect x="135" y="96" width="90" height="6" fill={themeColor} opacity="0.9" />
 
-        {/* Rubber Grip Band on Lid */}
-        <rect x="127" y="94" width="86" height="7" fill={themeColor} opacity="0.9" />
-
-        {/* Tumbler Main Body */}
+        {/* Tumbler Body */}
         <path
-          d="M120 110 L130 330 Q170 345 210 330 L220 110 Z"
-          fill="url(#tumblerBody)"
+          d="M125 110 L135 345 Q180 360 225 345 L235 110 Z"
+          fill="url(#cylinderGrad)"
           stroke="#475569"
           strokeWidth="1.5"
         />
 
-        {/* Moving Laser Highlight Reflection */}
-        <g clipPath="url(#tumblerClip)">
+        {/* Laser Sweep Sheen */}
+        <g clipPath="url(#tumblerMask)">
           <rect
             x={100 + laserSweep}
             y="90"
-            width="35"
-            height="270"
+            width="40"
+            height="300"
             fill="#FFFFFF"
-            opacity="0.12"
-            transform="skewX(-15)"
+            opacity="0.18"
+            transform="skewX(-16)"
           />
         </g>
 
-        {/* Laser Engraved Logo & Text */}
-        <g transform="translate(170, 210)">
-          {/* Insignia */}
-          <circle cx="0" cy="-25" r="14" fill="none" stroke="#E2E8F0" strokeWidth="2" opacity="0.85" />
-          <path d="M-6 -25 L0 -33 L6 -25 L0 -17 Z" fill="#E2E8F0" opacity="0.9" />
-          {/* Typography */}
+        {/* Laser Etched Crest & Logo */}
+        <g transform="translate(180, 220)">
+          <circle cx="0" cy="-28" r="16" fill="none" stroke="#E2E8F0" strokeWidth="2.2" opacity="0.9" />
+          <path d="M-8 -28 L0 -38 L8 -28 L0 -18 Z" fill="#E2E8F0" opacity="0.95" />
           <text
             x="0"
-            y="5"
+            y="8"
             textAnchor="middle"
-            fill="#E2E8F0"
-            fontSize="10"
+            fill="#F8FAFC"
+            fontSize="11"
             fontWeight="bold"
-            letterSpacing="2"
+            letterSpacing="2.5"
             fontFamily="sans-serif"
-            opacity="0.95"
           >
             VOLA CORP
           </text>
           <text
             x="0"
-            y="18"
+            y="22"
             textAnchor="middle"
-            fill="#94A3B8"
-            fontSize="7"
+            fill="#38BDF8"
+            fontSize="8"
             letterSpacing="1.5"
             fontFamily="sans-serif"
-            opacity="0.8"
           >
-            SUS 304 • VACUUM
+            THERMAL SUS 304
           </text>
         </g>
 
         {/* Base Rim */}
-        <ellipse cx="170" cy="330" rx="40" ry="6" fill="#020617" opacity="0.6" />
+        <ellipse cx="180" cy="345" rx="45" ry="7" fill="#020617" opacity="0.75" />
       </svg>
 
-      <div className="absolute bottom-2 bg-slate-900/90 border border-emerald-500/40 px-3.5 py-1.5 rounded-full backdrop-blur-md shadow-lg flex items-center space-x-2">
-        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeColor }} />
-        <span className="text-xs font-semibold text-white tracking-wide">
-          Laser Engraving • Matte Powder Coating
+      <div
+        style={{
+          transform: 'translateZ(40px)',
+        }}
+        className="absolute bottom-2 bg-slate-950/80 border border-cyan-500/50 backdrop-blur-xl px-4 py-1.5 rounded-full shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center space-x-2.5"
+      >
+        <span className="w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: themeColor }} />
+        <span className="text-xs font-bold text-white tracking-wider">
+          LASER ETCHING • MATTE FINISH
         </span>
       </div>
     </div>

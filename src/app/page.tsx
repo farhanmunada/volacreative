@@ -16,7 +16,6 @@ export default function HomePage() {
   const handleSelectItem = (item: ProductItem) => {
     setSelectedProduct(item);
     setActiveCategory(item.category);
-    // Smooth scroll to calculator form
     const el = document.getElementById('kalkulator');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -24,7 +23,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF5FF] text-slate-900">
+    <div className="min-h-screen flex flex-col bg-[#030712] text-slate-100 selection:bg-purple-600 selection:text-white">
       <Navbar />
 
       <main className="flex-grow">

@@ -8,159 +8,162 @@ interface LanyardProps {
 
 export const LanyardMockup: React.FC<LanyardProps> = ({
   categoryTitle,
-  themeColor = '#EA580C',
+  themeColor = '#F97316',
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Entrance spring with swing
   const scale = spring({
     frame,
     fps,
-    config: { damping: 12, mass: 0.9, stiffness: 100 },
+    config: { damping: 11, mass: 0.9, stiffness: 100 },
   });
 
-  const swingAngle = Math.sin(frame / 18) * 4;
-  const badgeY = Math.cos(frame / 20) * 6;
+  const swingAngle = Math.sin(frame / 20) * 5;
+  const rotateY = Math.cos(frame / 22) * 14;
+  const badgeFloat = Math.sin(frame / 18) * 8;
+
+  // Holographic rainbow angle shift
+  const holoOffset = interpolate(frame % 60, [0, 60], [0, 360]);
 
   return (
     <div
       style={{
-        transform: `scale(${scale}) rotate(${swingAngle}deg)`,
+        transform: `perspective(900px) rotateY(${rotateY}deg) rotateZ(${swingAngle}deg) scale(${scale})`,
         transformOrigin: 'top center',
+        transformStyle: 'preserve-3d',
       }}
       className="relative flex flex-col items-center justify-center w-full h-full select-none"
     >
-      {/* Background Soft Glow */}
       <div
-        className="absolute w-64 h-64 rounded-full blur-3xl opacity-30 pointer-events-none"
-        style={{ backgroundColor: themeColor }}
+        className="absolute w-80 h-80 rounded-full blur-[90px] opacity-35 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle, ${themeColor} 0%, rgba(139,92,246,0.3) 60%, transparent 80%)`,
+        }}
       />
 
       <svg
-        viewBox="0 0 360 400"
-        className="w-72 h-72 md:w-80 md:h-80 drop-shadow-2xl"
+        viewBox="0 0 380 420"
+        className="w-80 h-80 md:w-96 md:h-96 filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Lanyard Strap Gradient */}
-          <linearGradient id="strapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id="lanyardTissue" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#7C3AED" />
-            <stop offset="50%" stopColor="#A78BFA" />
-            <stop offset="100%" stopColor="#7C3AED" />
+            <stop offset="30%" stopColor="#C084FC" />
+            <stop offset="70%" stopColor="#9333EA" />
+            <stop offset="100%" stopColor="#581C87" />
           </linearGradient>
-          {/* Metal Clip Gradient */}
-          <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#E2E8F0" />
-            <stop offset="50%" stopColor="#94A3B8" />
-            <stop offset="100%" stopColor="#64748B" />
+
+          <linearGradient id="chromeClasp" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#F1F5F9" />
+            <stop offset="50%" stopColor="#64748B" />
+            <stop offset="100%" stopColor="#0F172A" />
+          </linearGradient>
+
+          <linearGradient id="holoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#06B6D4" />
+            <stop offset="33%" stopColor="#8B5CF6" />
+            <stop offset="66%" stopColor="#F97316" />
+            <stop offset="100%" stopColor="#10B981" />
           </linearGradient>
         </defs>
 
-        {/* Lanyard Straps */}
+        {/* Lanyard Straps with 3D Depth */}
         <path
-          d="M130 10 L165 170 L175 170 L140 10 Z"
-          fill="url(#strapGrad)"
-          stroke="#4C1D95"
+          d="M135 10 L180 175 L190 175 L145 10 Z"
+          fill="url(#lanyardTissue)"
+          stroke="rgba(255,255,255,0.2)"
           strokeWidth="1.5"
         />
         <path
-          d="M230 10 L195 170 L185 170 L220 10 Z"
-          fill="url(#strapGrad)"
-          stroke="#4C1D95"
+          d="M245 10 L200 175 L190 175 L235 10 Z"
+          fill="url(#lanyardTissue)"
+          stroke="rgba(255,255,255,0.2)"
           strokeWidth="1.5"
         />
 
-        {/* Strap Pattern Typography */}
-        <text
-          x="146"
-          y="90"
-          fill="#FFFFFF"
-          fontSize="7"
-          fontWeight="bold"
-          letterSpacing="2"
-          transform="rotate(78 146 90)"
-        >
-          VOLA FEST • VIP
-        </text>
+        {/* Heavy Chrome Clasp */}
+        <rect x="180" y="170" width="20" height="26" rx="5" fill="url(#chromeClasp)" stroke="#334155" />
+        <ellipse cx="190" cy="204" rx="10" ry="12" fill="none" stroke="url(#chromeClasp)" strokeWidth="3.5" />
 
-        {/* Metal Lobster Clasp */}
-        <rect x="172" y="165" width="16" height="24" rx="4" fill="url(#metalGrad)" stroke="#334155" />
-        <ellipse cx="180" cy="195" rx="9" ry="11" fill="none" stroke="url(#metalGrad)" strokeWidth="3" />
-
-        {/* PVC ID Card Badge Holder */}
-        <g transform={`translate(0, ${badgeY})`}>
-          {/* Acrylic Badge Shell */}
+        {/* Floating Holographic VIP Pass */}
+        <g transform={`translate(0, ${badgeFloat})`}>
+          {/* Card Backplate Glass */}
           <rect
-            x="105"
-            y="200"
-            width="150"
-            height="185"
-            rx="12"
-            fill="#0F172A"
-            stroke={themeColor}
+            x="110"
+            y="212"
+            width="160"
+            height="195"
+            rx="14"
+            fill="rgba(10, 15, 30, 0.92)"
+            stroke="url(#holoGradient)"
             strokeWidth="2.5"
-            filter="drop-shadow(0 10px 15px rgba(0,0,0,0.5))"
           />
 
-          {/* Top Hole Punch */}
-          <rect x="160" y="206" width="40" height="7" rx="3.5" fill="#334155" />
+          {/* Top Hanging Slot */}
+          <rect x="170" y="218" width="40" height="8" rx="4" fill="#1e293b" />
 
-          {/* Badge Header Strip */}
-          <rect x="105" y="218" width="150" height="36" fill={themeColor} />
+          {/* Header Strip with Glowing Badge */}
+          <rect x="110" y="232" width="160" height="38" fill={themeColor} opacity="0.95" />
           <text
-            x="180"
-            y="236"
+            x="190"
+            y="252"
             textAnchor="middle"
             fill="#FFFFFF"
             fontSize="12"
-            fontWeight="bold"
-            letterSpacing="2"
+            fontWeight="900"
+            letterSpacing="2.5"
             fontFamily="sans-serif"
           >
             VIP ALL ACCESS
           </text>
           <text
-            x="180"
-            y="247"
+            x="190"
+            y="263"
             textAnchor="middle"
             fill="#FEF08A"
-            fontSize="7"
+            fontSize="7.5"
             fontWeight="bold"
-            letterSpacing="1"
+            letterSpacing="1.5"
             fontFamily="sans-serif"
           >
             {categoryTitle.toUpperCase()}
           </text>
 
-          {/* Avatar / Hologram Box */}
-          <rect x="140" y="265" width="80" height="70" rx="8" fill="#1E293B" stroke="#475569" strokeWidth="1" />
-          <circle cx="180" cy="295" r="18" fill="#38BDF8" opacity="0.8" />
-          <path d="M172 315 C172 305 188 305 188 315 Z" fill="#E2E8F0" />
+          {/* Security Chip Hologram */}
+          <rect x="145" y="280" width="90" height="65" rx="8" fill="#0f172a" stroke="#334155" />
+          <circle cx="190" cy="312" r="18" fill="url(#holoGradient)" opacity="0.8" />
+          <path d="M182 312 L190 300 L198 312 L190 324 Z" fill="#FFFFFF" />
 
-          {/* Barcode Strip */}
-          <g transform="translate(130, 345)">
-            <rect x="0" y="0" width="3" height="24" fill="#E2E8F0" />
-            <rect x="6" y="0" width="6" height="24" fill="#E2E8F0" />
-            <rect x="16" y="0" width="2" height="24" fill="#E2E8F0" />
-            <rect x="22" y="0" width="5" height="24" fill="#E2E8F0" />
-            <rect x="30" y="0" width="7" height="24" fill="#E2E8F0" />
-            <rect x="40" y="0" width="3" height="24" fill="#E2E8F0" />
-            <rect x="46" y="0" width="8" height="24" fill="#E2E8F0" />
-            <rect x="58" y="0" width="4" height="24" fill="#E2E8F0" />
-            <rect x="66" y="0" width="6" height="24" fill="#E2E8F0" />
-            <rect x="76" y="0" width="3" height="24" fill="#E2E8F0" />
-            <rect x="83" y="0" width="7" height="24" fill="#E2E8F0" />
-            <rect x="94" y="0" width="4" height="24" fill="#E2E8F0" />
+          {/* Barcode & Security Digits */}
+          <g transform="translate(135, 360)">
+            <rect x="0" y="0" width="3" height="26" fill="#F8FAFC" />
+            <rect x="7" y="0" width="6" height="26" fill="#F8FAFC" />
+            <rect x="17" y="0" width="3" height="26" fill="#F8FAFC" />
+            <rect x="24" y="0" width="7" height="26" fill="#F8FAFC" />
+            <rect x="35" y="0" width="4" height="26" fill="#F8FAFC" />
+            <rect x="43" y="0" width="8" height="26" fill="#F8FAFC" />
+            <rect x="55" y="0" width="3" height="26" fill="#F8FAFC" />
+            <rect x="62" y="0" width="7" height="26" fill="#F8FAFC" />
+            <rect x="73" y="0" width="5" height="26" fill="#F8FAFC" />
+            <rect x="82" y="0" width="9" height="26" fill="#F8FAFC" />
+            <rect x="95" y="0" width="4" height="26" fill="#F8FAFC" />
+            <rect x="103" y="0" width="7" height="26" fill="#F8FAFC" />
           </g>
         </g>
       </svg>
 
-      <div className="absolute bottom-2 bg-slate-900/90 border border-orange-500/40 px-3.5 py-1.5 rounded-full backdrop-blur-md shadow-lg flex items-center space-x-2">
-        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeColor }} />
-        <span className="text-xs font-semibold text-white tracking-wide">
-          Double-Side Tissue Lanyard & RFID Pass
+      <div
+        style={{
+          transform: 'translateZ(40px)',
+        }}
+        className="absolute bottom-2 bg-slate-950/80 border border-orange-500/50 backdrop-blur-xl px-4 py-1.5 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.4)] flex items-center space-x-2.5"
+      >
+        <span className="w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: themeColor }} />
+        <span className="text-xs font-bold text-white tracking-wider">
+          RFID PASS • DOUBLE-SIDE TISSUE
         </span>
       </div>
     </div>
